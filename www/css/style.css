@@ -1,0 +1,67 @@
+/* Empty. Add your own CSS if you like */
+.full-vertical {
+    height: 100%;
+}
+
+.list .item {
+    height: 20%;
+}
+
+.image-loader-container {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+}
+
+.thumbnail-items-container {
+    display: flex;
+}
+
+.thumbnail-item-selected {
+    background: rgba(64, 64, 64, 0.6);
+}
+
+.thumbnail-item, .thumbnail-item-selected {
+    height: 150px;
+    width: 130px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+
+.thumbnail-item > * {
+    padding-left: 15px;
+    width: 100px;
+    height: 100px;
+}
+
+.image{
+    width: 100%;
+    min-height: 400px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center, center;
+}
+
+.flex {
+    display: flex;
+}
+
+.thumbnail-next-comic, .thumbnail-previous-comic {
+    height: 150px;
+    width: 130px;
+}
+
+.thumbnail-next-comic {
+    background: rgba(0, 128, 0, 0.5);
+}
+
+.thumbnail-previous-comic {
+    background: rgba(128, 128, 0, 0.5);
+}
+
+.thumbnail-next-comic-disabled, .thumbnail-previous-comic-disabled {
+    background: rgba(0, 0, 0, 0.1);
+}
+

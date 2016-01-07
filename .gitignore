@@ -1,3 +1,6 @@
 bin/*
 platforms/*
 plugins/*
+node_modules/*
+conf.js
+.myeclipse/phonegap_preview/*

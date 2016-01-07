@@ -1,0 +1,10 @@
+<ion-modal-view>
+<ion-header-bar>
+  <h1 class="title">Share Workstation</h1>
+</ion-header-bar>
+<ion-content>
+  <button on-tap="handleTakePhoto()"  class="button">Take photo</button>
+  <img ng-src="{{workstationPhoto.image}}" style="width: 100%;" />
+  <button on-tap="closeModal()">Close</button>
+</ion-content>
+</ion-modal-view>

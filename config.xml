@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.genuitec.coderlife" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>CoderLife</name>
+    <description>Blank Application</description>
+    <author email="info@genuitec.com" href="https://www.genuitec.com">Genuitec, LLC</author>
+    <content src="index.html" />
+    <preference name="permissions" value="none" />
+    <preference name="phonegap-version" value="cli-5.2.0" />
+    <preference name="orientation" value="default" />
+    <preference name="target-device" value="universal" />
+    <preference name="fullscreen" value="true" />
+    <preference name="webviewbounce" value="true" />
+    <preference name="prerendered-icon" value="true" />
+    <preference name="stay-in-webview" value="false" />
+    <preference name="ios-statusbarstyle" value="black-opaque" />
+    <preference name="detect-data-types" value="true" />
+    <preference name="exit-on-suspend" value="false" />
+    <preference name="show-splash-screen-spinner" value="true" />
+    <preference name="auto-hide-splash-screen" value="true" />
+    <preference name="android-minSdkVersion" value="14" />
+    <preference name="android-installLocation" value="auto" />
+    <icon src="www/icon.png" />
+    <icon gap:platform="android" gap:qualifier="ldpi" src="www/res/icon/android/icon-36-ldpi.png" />
+    <icon gap:platform="android" gap:qualifier="mdpi" src="www/res/icon/android/icon-48-mdpi.png" />
+    <icon gap:platform="android" gap:qualifier="hdpi" src="www/res/icon/android/icon-72-hdpi.png" />
+    <icon gap:platform="android" gap:qualifier="xhdpi" src="www/res/icon/android/icon-96-xhdpi.png" />
+    <icon gap:platform="ios" height="57" src="www/res/icon/ios/icon-57.png" width="57" />
+    <icon gap:platform="ios" height="72" src="www/res/icon/ios/icon-72.png" width="72" />
+    <icon gap:platform="ios" height="114" src="www/res/icon/ios/icon-57-2x.png" width="114" />
+    <icon gap:platform="ios" height="144" src="www/res/icon/ios/icon-72-2x.png" width="144" />
+    <gap:splash src="www/splash.png" />
+    <gap:splash gap:platform="android" gap:qualifier="port-ldpi" src="www/res/screen/android/screen-ldpi-portrait.png" />
+    <gap:splash gap:platform="android" gap:qualifier="port-mdpi" src="www/res/screen/android/screen-mdpi-portrait.png" />
+    <gap:splash gap:platform="android" gap:qualifier="port-hdpi" src="www/res/screen/android/screen-hdpi-portrait.png" />
+    <gap:splash gap:platform="android" gap:qualifier="port-xhdpi" src="www/res/screen/android/screen-xhdpi-portrait.png" />
+    <gap:splash gap:platform="ios" height="480" src="www/res/screen/ios/screen-iphone-portrait.png" width="320" />
+    <gap:splash gap:platform="ios" height="960" src="www/res/screen/ios/screen-iphone-portrait-2x.png" width="640" />
+    <gap:splash gap:platform="ios" height="1136" src="www/res/screen/ios/screen-iphone-portrait-568h-2x.png" width="640" />
+    <gap:splash gap:platform="ios" height="1024" src="www/res/screen/ios/screen-ipad-portrait.png" width="768" />
+    <gap:splash gap:platform="ios" height="768" src="www/res/screen/ios/screen-ipad-landscape.png" width="1024" />
+    <access origin="*" />
+    <gap:config-file mode="merge" parent="/manifest" platform="android" xmlns:android="http://schemas.android.com/apk/res/android">
+        <application android:debuggable="true" />
+    </gap:config-file>
+    <gap:platform name="android" />
+    <gap:plugin name="org.apache.cordova.device" source="npm" spec="0.3.0">
+    </gap:plugin>
+    <gap:plugin name="com.ionic.keyboard" source="npm" spec="1.0.4" />
+    <gap:plugin name="org.apache.cordova.splashscreen" source="npm" spec="1.0.0">
+    </gap:plugin>
+    <gap:plugin name="org.apache.cordova.statusbar" source="npm" spec="0.1.10">
+    </gap:plugin>
+    <gap:plugin name="org.apache.cordova.camera" source="npm" spec="0.3.6">
+    </gap:plugin>
+    <gap:plugin name="org.apache.cordova.console" source="npm" spec="0.2.13">
+    </gap:plugin>
+    <gap:plugin name="cordova-plugin-whitelist" source="npm" spec="1.2.1-dev">
+    </gap:plugin>
+    <gap:plugin name="phonegap-plugin-push" source="npm" spec="1.5.2" />
+    <preference name="SplashScreen" value="screen" />
+    <gap:platform name="ios"/>
+    <engine name="android" spec="~4.1.1" />
+</widget>
