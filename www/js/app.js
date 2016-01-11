@@ -22,7 +22,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   applicationId: '{$PARSE_APP_ID}',
   restAPIKey: '{$PARSE_REST_API_KEY}'
 })
-.run(function($ionicPlatform, $http, PushNotificationValues, Parse) {
+.constant('NotificationType', {
+  productUpdate: 'product_update',
+  newComicAvailable: 'new_comic_available'
+})
+.run(function($ionicPlatform, $state, $http, PushNotificationValues, Parse, NotificationType) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -38,12 +42,23 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
     var push = PushNotification.init({
         android: {
-          senderID: PushNotificationValues.senderId
+          senderID: PushNotificationValues.senderId,
+          forceShow: true
         }
     });
 
     push.on('notification', function(data) {
       console.log('notification received', data);
+      switch (data.additionalData.notification_type) {
+        case NotificationType.productUpdate:
+          $state.go('tab.about');
+          break;
+        case NotificationType.newComicAvailable:
+          $state.go('tab.comic');
+          break;
+        default:
+          console.log("Default notification, do nothing");
+      }
     });
 
     push.on('error', function(e) {
