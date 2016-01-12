@@ -26,8 +26,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   productUpdate: 'product_update',
   newComicAvailable: 'new_comic_available'
 })
-.run(function($ionicPlatform, $state, $http, PushNotificationValues, Parse, NotificationType) {
+.run(function($rootScope, $ionicPlatform, $ionicModal, $state, $http, PushNotificationValues, Parse, NotificationType) {
+  $rootScope.noInternetConnection = null;
+  $rootScope.isRegisteredToReceivePushNotifications = false;
+
   $ionicPlatform.ready(function() {
+
+    $ionicModal.fromTemplateUrl('templates/modal/no-internet.html', {
+        animation: 'slide-in-up'
+      }).then(function(modal) {
+        $rootScope.noInternetConnection = modal;
+      });
+
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -40,55 +50,71 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       StatusBar.styleDefault();
     }
 
-    var push = PushNotification.init({
-        android: {
-          senderID: PushNotificationValues.senderId,
-          forceShow: true
-        }
-    });
+    // TODO: Move to a service
+    var registerDevice = function () {
+      var push = PushNotification.init({
+          android: {
+            senderID: PushNotificationValues.senderId,
+            forceShow: true
+          }
+      });
 
-    push.on('notification', function(data) {
-      console.log('notification received', data);
-      switch (data.additionalData.notification_type) {
-        case NotificationType.productUpdate:
-          $state.go('tab.about');
-          break;
-        case NotificationType.newComicAvailable:
-          $state.go('tab.comic');
-          break;
-        default:
-          console.log("Default notification, do nothing");
+      push.on('notification', function(data) {
+        console.log('notification received', data);
+        switch (data.additionalData.notification_type) {
+          case NotificationType.productUpdate:
+            $state.go('tab.about');
+            break;
+          case NotificationType.newComicAvailable:
+            $state.go('tab.comic');
+            break;
+          default:
+            console.log("Default notification, do nothing");
+        }
+      });
+
+      push.on('error', function(e) {
+          console.log(e.message);
+      });
+
+      push.on('registration', function(data) {
+          var token = data.registrationId;
+
+          var reqData = {
+              "deviceType": "android",
+              "deviceToken": token,
+              "pushType": "gcm",
+              "GCMSenderId": PushNotificationValues.senderId,
+              "channels": PushNotificationValues.channels
+          }
+          return $http.post('https://parse.com/1/installations', reqData , {
+                  "headers": {
+                      "Content-Type": "application/json",
+                      "X-Parse-Application-Id": Parse.applicationId,
+                      "X-Parse-REST-API-Key": Parse.restAPIKey
+                  }
+              })
+              .success(function(res, status, headers, config) {
+                $rootScope.isRegisteredToReceivePushNotifications = true;
+                  console.log("Registering NEW device successfull");
+              })
+              .error(function(res, status, headers, config) {
+                  console.log("Something went wrong");
+              });
+      });
+    };
+
+    // Block user interaction with the app if there is no internet connection
+    document.addEventListener("offline", function () {
+      $rootScope.noInternetConnection.show();
+    }, false);
+
+    document.addEventListener("online", function () {
+      if (!$rootScope.isRegisteredToReceivePushNotifications) {
+        registerDevice();
       }
-    });
-
-    push.on('error', function(e) {
-        console.log(e.message);
-    });
-
-    push.on('registration', function(data) {
-        var token = data.registrationId;
-
-        var reqData = {
-            "deviceType": "android",
-            "deviceToken": token,
-            "pushType": "gcm",
-            "GCMSenderId": PushNotificationValues.senderId,
-            "channels": PushNotificationValues.channels
-        }
-        return $http.post('https://parse.com/1/installations', reqData , {
-                "headers": {
-                    "Content-Type": "application/json",
-                    "X-Parse-Application-Id": Parse.applicationId,
-                    "X-Parse-REST-API-Key": Parse.restAPIKey
-                }
-            })
-            .success(function(res, status, headers, config) {
-                console.log("Registering NEW device successfull");
-            })
-            .error(function(res, status, headers, config) {
-                console.log("Something went wrong");
-            });
-    });
+      $rootScope.noInternetConnection.hide();
+    }, false);
 
   });
 })
