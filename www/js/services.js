@@ -13,7 +13,7 @@ angular.module('starter.services', [])
 .factory('Comics', function ($http, $q, ApiPrefix) {
   return {
     getLatest: function () {
-      return $http.get(ApiPrefix.url+'/comic/latest', {params: { device_id: '123456' }})
+      return $http.get(ApiPrefix.url+'/comic/latest'})
         .then(function (response){
           return response.data;
         });

@@ -22,6 +22,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   applicationId: '{$PARSE_APP_ID}',
   restAPIKey: '{$PARSE_REST_API_KEY}'
 })
+.factory('DeviceUUIDInterceptor', function ($ionicPlatform, $q) {
+  return {
+    'request':  function (config) {
+      return $q(function (resolve, reject){
+        $ionicPlatform.ready(function() {
+          if (typeof config.params == 'undefined') {
+            config.params = {};
+          }
+          config.params.device_id = md5(ionic.Platform.device().uuid);
+          
+          resolve(config);
+        });
+      });
+    }
+  };
+})
 .constant('NotificationType', {
   productUpdate: 'product_update',
   newComicAvailable: 'new_comic_available'
@@ -31,7 +47,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   $rootScope.isRegisteredToReceivePushNotifications = false;
 
   $ionicPlatform.ready(function() {
-
     $ionicModal.fromTemplateUrl('templates/modal/no-internet.html', {
         animation: 'slide-in-up'
       }).then(function(modal) {
@@ -119,7 +134,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
@@ -183,8 +198,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/home');
-}).
-directive('thumbnailGallery', function ($interval, $ionicScrollDelegate, $window) {
+
+  $httpProvider.interceptors.push('DeviceUUIDInterceptor');
+})
+.directive('thumbnailGallery', function ($interval, $ionicScrollDelegate, $window) {
   return {
     restrict: 'E',
     templateUrl: 'templates/directives/thumbnail-gallery.html',
