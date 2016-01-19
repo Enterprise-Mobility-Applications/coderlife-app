@@ -178,13 +178,28 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   })
   .state('tab.share', {
+    abstract: true,
     url: '/share',
     views: {
       'tab-share': {
-        templateUrl: 'templates/tab-share.html',
-        controller: 'ShareCtrl'
+        template: '<ion-nav-view title="Share"></ion-nav-view>'
       }
     }
+  })
+  .state('tab.share.index', {
+    url: '',
+    templateUrl: 'templates/tab-share.html',
+    controller: 'ShareCtrl'
+  })
+  .state('tab.share.story', {
+    url: '/share/story',
+    templateUrl: 'templates/share-story.html',
+    controller: 'ShareStoryCtrl'
+  })
+  .state('tab.share.workstation', {
+    url: '/share/story',
+    templateUrl: 'templates/share-workstation.html',
+    controller: 'ShareWorkstationCtrl'
   })
   .state('tab.about', {
     url: '/about',

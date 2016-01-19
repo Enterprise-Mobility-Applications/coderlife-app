@@ -13,7 +13,7 @@ angular.module('starter.services', [])
 .factory('Comics', function ($http, $q, ApiPrefix) {
   return {
     getLatest: function () {
-      return $http.get(ApiPrefix.url+'/comic/latest'})
+      return $http.get(ApiPrefix.url+'/comic/latest')
         .then(function (response){
           return response.data;
         });
@@ -36,13 +36,13 @@ angular.module('starter.services', [])
 }).factory('Share', function($http, $q, ApiPrefix) {
   return {
     shareWorkstation: function (params) {
-      return $http.post(ApiPrefix.url+'/share/workstation')
+      return $http.post(ApiPrefix.url+'/share/workstation', params)
         .then(function (response) {
           return response.data;
         });
-    },
+    },  
     shareStory: function (params) {
-      return $http.post(ApiPrefix.url+'/share/story')
+      return $http.post(ApiPrefix.url+'/share/story', params)
         .then(function (response) {
           return response.data;
         });

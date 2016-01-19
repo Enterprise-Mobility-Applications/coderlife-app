@@ -107,49 +107,51 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('ShareCtrl', function($scope, $ionicModal) {
-  $scope.workstationPhoto = {
-    image: null
+.controller('ShareCtrl', function($scope, $ionicModal) {})
+.controller('AboutCtrl', function($scope) {})
+.controller('ShareWorkstationCtrl', function($scope, $ionicHistory, Share) {
+  $scope.shareWorkstationParams = {
+    base64Image: null,
+    twitterHandle: null
   };
 
-  $ionicModal.fromTemplateUrl('templates/modal/share-workstation.html', {
-      scope: $scope,
-      animation: 'slide-in-up'
-    }).then(function(modal) {
-      $scope.modal = modal;
-    });
-    $scope.openModal = function() {
-      $scope.modal.show();
-    };
-    $scope.closeModal = function() {
-      $scope.modal.hide();
-    };
-    //Cleanup the modal when we're done with it!
-    $scope.$on('$destroy', function() {
-      $scope.modal.remove();
-    });
-    // Execute action on hide modal
-    $scope.$on('modal.hidden', function() {
-      // Execute action
-    });
-    // Execute action on remove modal
-    $scope.$on('modal.removed', function() {
-      // Execute action
-    });
-    $scope.handleTakePhoto = function () {
-      navigator.camera.getPicture(function (cameraResult) {
-        $scope.workstationPhoto =  { image: 'data:image/jpeg;base64,' + cameraResult };
-        $scope.$digest();
-      },
-      function () {
-        console.log('error camera');
-      }, { sourceType: Camera.PictureSourceType.CAMERA, destinationType: Camera.DestinationType.DATA_URL });   
-    }
+  $scope.handleTakePhoto = function () {
+    navigator.camera.getPicture(function (cameraResult) {
+      $scope.shareWorkstationParams.base64Image =  cameraResult;
+      $scope.$digest();
+    },
+    function () {
+      console.log('error camera');
+    }, { sourceType: Camera.PictureSourceType.CAMERA, destinationType: Camera.DestinationType.DATA_URL });   
+  };
 
-  $scope.handleShareMyWorkstationTap = function() {
-    console.log("handle share my workstation tap");
-    $scope.openModal();
+  $scope.handleSubmitButtonTap = function () {
+    console.log("Submit button tap");
+    Share.shareWorkstation($scope.shareWorkstationParams)
+    .then(function () {
+      $ionicHistory.goBack();
+    })
+    .catch(function () {
+      //TODO: Display error message
+      console.log('Error while submiting story');
+    })
   };
 })
+.controller('ShareStoryCtrl', function($scope, $ionicHistory, Share) {
+  $scope.shareStoryParams = {
+    story: null,
+    twitterHandle: null
+  };
 
-.controller('AboutCtrl', function($scope) {});
+  $scope.handleSubmitButtonTap = function () {
+    console.log("Submit button tap");
+    Share.shareStory($scope.shareStoryParams)
+    .then(function () {
+      $ionicHistory.goBack();
+    })
+    .catch(function () {
+      //TODO: Display error message
+      console.log('Error while submiting story');
+    })
+  };
+});

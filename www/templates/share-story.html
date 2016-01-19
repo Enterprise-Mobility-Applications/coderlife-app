@@ -1,0 +1,20 @@
+<ion-view title="Story">
+    <ion-header-bar>
+      <h1 class="title">Share Story</h1>
+    </ion-header-bar>
+    <ion-content>
+      <div class="padding">
+        <div class="list">
+          <label class="item item-input item-floating-label">
+            <span class="input-label">Story</span>
+            <textarea ng-model="shareStoryParams.story" name="story" placeholder="Story"></textarea>
+          </label>
+          <label class="item item-input item-floating-label">
+            <span class="input-label">Twitter Handle (optional)</span>
+            <input ng-model="shareStoryParams.twitterHandle" type="text" name="twitter_handle" placeholder="Twitter Handle (optional)" />
+          </label> 
+        </div>
+        <button on-tap="handleSubmitButtonTap()" class="button button-block button-positive">Submit</button>
+      </div>
+    </ion-content>
+</ion-view>
