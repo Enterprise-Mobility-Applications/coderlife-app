@@ -12,7 +12,7 @@
       </div>
       <button on-tap="handleTakePhoto()" class="button button-block button-balanced">Take photo</button>
       <img ng-src="{{ 'data:image/jpeg;base64,' + shareWorkstationParams.base64Image}}" style="width: 100%;" />
-      <button on-tap="handleSubmitButtonTap()" class="button button-block button-positive">Submit</button>
+      <button ng-disabled="shareWorkstationForm.invalid" on-tap="handleSubmitButtonTap()" class="button button-block button-positive">Submit</button>
     </div>
   </ion-content>
 </ion-view>

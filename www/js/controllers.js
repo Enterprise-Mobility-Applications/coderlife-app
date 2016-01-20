@@ -110,10 +110,23 @@ angular.module('starter.controllers', [])
 .controller('ShareCtrl', function($scope, $ionicModal) {})
 .controller('AboutCtrl', function($scope) {})
 .controller('ShareWorkstationCtrl', function($scope, $ionicHistory, Share) {
+  $scope.shareWorkstationForm = {
+    invalid: true
+  };
+
   $scope.shareWorkstationParams = {
     base64Image: null,
     twitterHandle: null
   };
+
+  $scope.$watch('shareWorkstationParams.base64Image', function (newValue, oldValue) {
+    console.log("new value:", newValue);
+    if (newValue && newValue.length > 0) {
+      $scope.shareWorkstationForm.invalid = false;
+    } else {
+      $scope.shareWorkstationForm.invalid = true;
+    }
+  });
 
   $scope.handleTakePhoto = function () {
     navigator.camera.getPicture(function (cameraResult) {
@@ -142,6 +155,18 @@ angular.module('starter.controllers', [])
     story: null,
     twitterHandle: null
   };
+
+  $scope.shareStoryForm = {
+    invalid: true
+  }
+
+  $scope.$watch('shareStoryParams.story', function (newValue, oldValue) {
+    if (String(newValue).length > 5) {
+      $scope.shareStoryForm.invalid = false;
+    } else {
+      $scope.shareStoryForm.invalid = true;
+    }
+  });
 
   $scope.handleSubmitButtonTap = function () {
     console.log("Submit button tap");

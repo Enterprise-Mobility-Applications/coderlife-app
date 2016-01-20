@@ -14,7 +14,7 @@
             <input ng-model="shareStoryParams.twitterHandle" type="text" name="twitter_handle" placeholder="Twitter Handle (optional)" />
           </label> 
         </div>
-        <button on-tap="handleSubmitButtonTap()" class="button button-block button-positive">Submit</button>
+        <button ng-disabled="shareStoryForm.invalid" on-tap="handleSubmitButtonTap()" class="button button-block button-positive">Submit</button>
       </div>
     </ion-content>
 </ion-view>
