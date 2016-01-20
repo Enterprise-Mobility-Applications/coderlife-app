@@ -3,7 +3,7 @@
         <div ng-class="{'thumbnail-item-selected':(($index ) == (selectedIndex + 1 ) ), 'thumbnail-item': true}" collection-repeat="dataEntry in dataPolish" on-tap="handleItemTap($index)" >
 
             <div ng-if="$first"
-                ng-class="['thumbnail-next-comic', nextComicEnabled ? 'thumbnail-next-comic-enabled':'thumbnail-next-comic-disabled']"
+                ng-class="['thumbnail-arrow', 'ion-chevron-left', nextComicEnabled ? 'thumbnail-arrow-active':'thumbnail-arrow-inactive']"
                 ng-click="handleNextTap()"
             >
             </div>
@@ -11,7 +11,7 @@
             <img ng-if="$first == $last" ng-src="{{dataEntry.image}}"  />
             
             <div ng-if="$last"
-                 ng-class="['thumbnail-previous-comic', previousComicEnabled ? 'thumbnail-previous-comic-enabled':'thumbnail-previous-comic-disabled']"
+                 ng-class="['thumbnail-arrow', 'ion-chevron-right', previousComicEnabled ? 'thumbnail-arrow-active':'thumbnail-arrow-inactive']"
                  ng-click="handlePreviousTap()"
             >
             </div>

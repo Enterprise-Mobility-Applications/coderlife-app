@@ -1,10 +1,22 @@
+/* Webfont: Lato-Regular */@font-face {
+    font-family: 'LatoWeb';
+    src: url('fonts/Lato-Regular.eot'); /* IE9 Compat Modes */
+    src: url('fonts/Lato-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('fonts/Lato-Regular.woff2') format('woff2'), /* Modern Browsers */
+         url('fonts/Lato-Regular.woff') format('woff'), /* Modern Browsers */
+         url('fonts/Lato-Regular.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+
 @font-face {
     font-family: 'genuitec-icons';
-    src:    url(../'fonts/genuitec-icons.eot?oggi3s');
-    src:    url(../'fonts/genuitec-icons.eot?oggi3s#iefix') format('embedded-opentype'),
-        url(../'fonts/genuitec-icons.ttf?oggi3s') format('truetype'),
-        url(../'fonts/genuitec-icons.woff?oggi3s') format('woff'),
-        url(../'fonts/genuitec-icons.svg?oggi3s#genuitec-icons') format('svg');
+    src:    url('../fonts/genuitec-icons.eot?oggi3s');
+    src:    url('../fonts/genuitec-icons.eot?oggi3s#iefix') format('embedded-opentype'),
+        url('../fonts/genuitec-icons.ttf?oggi3s') format('truetype'),
+        url('../fonts/genuitec-icons.woff?oggi3s') format('woff'),
+        url('../fonts/genuitec-icons.svg?oggi3s#genuitec-icons') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -24,10 +36,38 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-devhumor-coderlifeapp:before {
+    content: "\e900";
+}
+.icon-share-coderlifeapp:before {
+    content: "\e901";
+}
+.icon-comic-coderlifeapp:before {
+    content: "\e902";
+}
+.icon-aboutus-coderlifeapp:before {
+    content: "\e903";
+}
+.icon-home-coderlifeapp:before {
+    content: "\e904";
+}
+
+
 
 /* Empty. Add your own CSS if you like */
+
+html, body,
+.ionic-body {
+    font-family: 'LatoWeb';
+}
+
 .bar.bar-stable {
     background: #041528;
+}
+
+.pane, .view {
+    background: #041528;
+    color: white;
 }
 
 ion-tabs.tabs-color-active-positive .tab-item {
@@ -45,6 +85,10 @@ ion-tabs.tabs-color-active-positive .tab-item {
 
 .bar.bar-stable .title {
     color: white;
+}
+
+.item-input {
+    background: white;
 }
 
 /******/
@@ -78,12 +122,25 @@ ion-tabs.tabs-color-active-positive .tab-item {
     display: flex;
     align-items: center;
     align-content: center;
+    padding-left: 15px;
 }
 
 .thumbnail-item > * {
-    padding-left: 15px;
     width: 100px;
     height: 100px;
+}
+
+.thumbnail-arrow {
+    line-height: 100px;
+    font-size: 50px;
+}
+
+.thumbnail-arrow-active {
+    color: #2CB0C3;
+}
+
+.thumbnail-arrow-inactive {
+    color: #AEAEAE;
 }
 
 .image{
