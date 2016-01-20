@@ -13,39 +13,63 @@ angular.module('starter.services', [])
 .factory('Comics', function ($http, $q, ApiPrefix) {
   return {
     getLatest: function () {
+      SpinnerDialog.show(null, null, function () {return true});
+
       return $http.get(ApiPrefix.url+'/comic/latest')
         .then(function (response){
           return response.data;
+        })
+        .finally(function () {
+          SpinnerDialog.hide();
         });
     },
     get: function (comicId) {
+      SpinnerDialog.show(null, null, function () {return true});
+
       return $http.get(ApiPrefix.url+'/comic/'+comicId).then(function (response){
         return response.data;
+      })
+      .finally(function () {
+        SpinnerDialog.hide();
       });
+
     }
   }
 }).factory('Humor', function ($http, $q, ApiPrefix) {
   return {
     get: function () {
+      SpinnerDialog.show(null, null, function () {return true});
+
       return $http.get(ApiPrefix.url+'/humor/random')
         .then(function (response){
           return response.data;
-        });
+      })
+      .finally(function () {
+        SpinnerDialog.hide();
+      });
     }
   }
 }).factory('Share', function($http, $q, ApiPrefix) {
   return {
     shareWorkstation: function (params) {
+      SpinnerDialog.show(null, null, function () {return true});
       return $http.post(ApiPrefix.url+'/share/workstation', params)
         .then(function (response) {
           return response.data;
+        })
+        .finally(function () {
+          SpinnerDialog.hide();
         });
     },  
     shareStory: function (params) {
+      SpinnerDialog.show(null, null, function () {return true});
       return $http.post(ApiPrefix.url+'/share/story', params)
         .then(function (response) {
           return response.data;
-        });
+        })
+        .finally(function () {
+          SpinnerDialog.hide();
+        });pl
     }
   }
 });
