@@ -172,3 +172,192 @@ ion-tabs.tabs-color-active-positive .tab-item {
     background: rgba(0, 0, 0, 0.1);
 }
 
+/*
+#share-container {
+    background: url('../img/share.svg') top center no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+
+#share-workstation-container {
+    background: url('../img/share-workspace.svg') top center no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+*/
+@media (max-width: 320px) {
+    #comics-container {
+        background: url('../img/comics-ldpi.png') top center no-repeat;
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+
+    #share-container {
+        background: url('../img/share-ldpi.svg') top center no-repeat;
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+
+    #about-us-container {
+        background: url('../img/about-us-ldpi.png') top center no-repeat;
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+
+    #dev-humor-container {
+        background: url('../img/dev-humor-ldpi.png') top center no-repeat;
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+
+    #surprise-me-container {
+        background: url('../img/surprise-ldpi.png') top center no-repeat;
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+
+    #share-story-container {
+        background: url('../img/share-story-ldpi.png') top center no-repeat;
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+
+    #share-workstation-container {
+        background: url('../img/share-workspace-ldpi.png') top center no-repeat;
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+}
+
+@media (min-width: 321px) and (max-width: 480px) {
+    #comics-container {
+        background: url('../img/comics-mdpi.png') top center no-repeat;
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+
+    #share-container {
+        background: url('../img/share-mdpi.png') top center no-repeat;
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+
+    #about-us-container {
+        background: url('../img/about-us-mdpi.png') top center no-repeat;
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+
+    #dev-humor-container {
+        background: url('../img/dev-humor-mdpi.png') top center no-repeat;
+        background-size: cover; 
+        background-position: 50% 50%;
+    }
+
+    #surprise-me-container {
+        background: url('../img/surprise-mdpi.png') top center no-repeat;
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+
+    #share-story-container {
+        background: url('../img/share-story-mdpi.png') top center no-repeat;
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+
+    #share-workstation-container {
+        background: url('../img/share-workspace-mdpi.png') top center no-repeat;
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+}
+
+@media (min-width: 481px) {
+    #comics-container {
+        background: url('../img/comics-hdpi.png') top center no-repeat;
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+
+    #share-container {
+        background: url('../img/share-hdpi.png') top center no-repeat;
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+
+    #about-us-container {
+        background: url('../img/about-us-hdpi.png') top center no-repeat;
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+
+    #dev-humor-container {
+        background: url('../img/dev-humor-hdpi.png') top center no-repeat;
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+
+    #surprise-me-container {
+        background: url('../img/surprise-hdpi.png') top center no-repeat;
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+
+    #share-story-container {
+        background: url('../img/share-story-hdpi.png') top center no-repeat;
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+
+    #share-workstation-container {
+        background: url('../img/share-workspaces-hdpi.png') top center no-repeat;
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+}
+
+.big-button {
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.big-button .title {
+    font-size: 1.3em;
+}
+
+.big-button .time-since-last-entry-container .title {
+    font-size: 1.3em;
+    flex: 1 1 auto;
+}
+
+.big-button .time-since-last-entry-container .time-since-last-entry {
+    flex: 0 0 auto;
+}
+
+.about-button {
+    color: #2CAFC3;
+    border: none;
+}
+
+.home-button-list .item {
+    border-color: #041528;
+}
+
+.big-button .text-container {
+    display: flex;
+    height: 100%;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.big-button .time-since-last-entry-container {
+    align-items: flex-end !important;
+    justify-content: space-around !important;
+}
+
+#no-connection-container {
+    background: url('../img/bob-disconnect.svg') top center no-repeat #041528;;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+

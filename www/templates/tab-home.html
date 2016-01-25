@@ -1,41 +1,47 @@
 <ion-view view-title="Home">
   <ion-content>
-    <div class="list full-vertical">
-      <a href="#/tab/comic">
-        <div class="item">
-          <div>
-           Comic
+    <div class="list full-vertical home-button-list">
+      <div id="comics-container" ui-sref="tab.comic" class="item big-button">
+        <div class="text-container time-since-last-entry-container">
+          <div class="title">
+            Comic
+          </div>
+          <div class="time-since-last-entry">
+            {{lastUpdatedSections.comics}}
           </div>
         </div>
-      </a>
-      <a href="#/tab/humor">
-        <div class="item">
-          <div>
+      </div>
+      <div id="dev-humor-container" ui-sref="tab.humor" class="item big-button">
+        <div class="text-container time-since-last-entry-container">
+          <div class="title">
             Dev Humor
           </div>
+          <div class="time-since-last-entry">
+            {{lastUpdatedSections.humor}}
+          </div>
         </div>
-      </a>
-      <a href="#/tab/humor">
-        <div class="item">
-          <div>
+      </div>
+      <div id="surprise-me-container" ui-sref="tab.humor" class="item big-button">
+        <div class="text-container">
+          <div class="title">
             Surprise Me
           </div>
         </div>
-      </a>
-      <a href="#/tab/share">
-        <div class="item">
-          <div>
+      </div>
+      <div id="share-container" ui-sref="tab.share.index" class="item big-button">
+        <div class="text-container">
+          <div class="title">
             Share Stories
           </div>
         </div>
-      </a>
-      <a href="#/tab/about">
-        <div class="item">
-          <div>
+      </div>
+      <div id="about-us-container" ui-sref="tab.about" class="item big-button">
+        <div class="text-container">
+          <div class="title">
             Learn About Genuitec
           </div>
         </div>
-      </a>
+      </div>
     </div>
   </ion-content>
 </ion-view>
