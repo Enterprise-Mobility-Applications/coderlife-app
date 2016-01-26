@@ -1,12 +1,12 @@
 <ion-view view-title="Comic">
     <ion-content>
-    <div style="display: flex; flex-direction: column; height: 100%;">
-        <div style="flex: 1 0 300px; width: 100%;">
+    <div id="comics-section-container" >
+        <div id="comic-container">
             <ion-scroll scrollbar-x="false" scrollbar-y="false" delegate-handle="comic-image" direction="xy" min-zoom="1" locking="false" zooming="true" overflow-scroll="false"  style="height: 100%;">
                  <div on-swipe-left="handleSwipeLeft($event)" on-swipe-right="handleSwipeRight($event)" class="image" style="background-image: url(' {{selectedFrame}} ');"></div> 
             </ion-scroll>
         </div>
-        <div style="flex: 0 1 150px; width: 100%;">
+        <div id="frames-container" >
         <thumbnail-gallery
             data="comic.frames"
             selected-index="selectedFrameIndex"
