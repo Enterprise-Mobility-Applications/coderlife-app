@@ -128,7 +128,31 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ShareCtrl', function($scope, $ionicModal) {})
-.controller('AboutCtrl', function($scope) {})
+.controller('AboutCtrl', function($scope) {
+  $scope.handleAboutCoderLifeTap = function () {
+    cordova.InAppBrowser.open('https://twitter.com/thecoderlife', '_system');
+  };
+
+  $scope.handleAboutGenuitecTap = function () {
+    cordova.InAppBrowser.open('https://www.genuitec.com/', '_system');
+  };
+
+  $scope.handlePowerUpCoderTap = function () {
+    cordova.InAppBrowser.open('https://www.genuitec.com/developer_workflow/', '_system');
+  };
+
+  $scope.handleGetMyEclipseTap = function () {
+    cordova.InAppBrowser.open('https://www.genuitec.com/products/myeclipse/', '_system');
+  };
+
+  $scope.handlePowerUpWebCodingTap = function () {
+    cordova.InAppBrowser.open('https://www.genuitec.com/products/webclipse/', '_system');
+  };
+
+  $scope.handleDriveYourTeamTap = function () {
+    cordova.InAppBrowser.open('https://www.genuitec.com/products/sdc/', '_system');
+  };
+})
 .controller('ShareWorkstationCtrl', function($scope, $ionicHistory, Share) {
   $scope.shareWorkstationForm = {
     invalid: true
