@@ -10,7 +10,21 @@
 
 angular.module('starter.controllers', [])
 
-.controller('HomeCtrl', function($scope) {})
+.controller('HomeCtrl', function($scope, $q, Comics, Humor) {
+  $scope.lastUpdatedSections = {
+    comics: null,
+    humor: null
+  }
+
+  $q.all([Comics.getLatest(), Humor.getLatest()])
+    .then(function (responses) {
+      $scope.lastUpdatedSections.comics = moment(responses[0].created_at * 1000).fromNow();
+      $scope.lastUpdatedSections.humor = moment(responses[1].created_at * 1000).fromNow();
+    })
+    .catch(function () {
+      // TODO: Handle error
+    });
+})
 
 .controller('ComicCtrl', function($scope, $http, $q, $ionicScrollDelegate, Comics) {
   $scope.comic = null;
@@ -76,18 +90,25 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('HumorCtrl', function($scope, $ionicScrollDelegate, Humor) {
+.controller('HumorCtrl', function($scope, $state, $ionicScrollDelegate, Humor) {
   $scope.selectedImage = null;
-      Humor.get()
-        .then(function (humorEntry) {
-          $scope.selectedImage = humorEntry;
-        });
+
+  if (typeof $state.current.data != 'undefined' && $state.current.data.latest) {
+    Humor.getLatest()
+      .then(function (humorEntry) {
+        $scope.selectedImage = humorEntry;
+      });
+  } else {
+    Humor.getRandom()
+      .then(function (humorEntry) {
+        $scope.selectedImage = humorEntry;
+      });    
+  }
 
   $scope.handleSwipeRight = function (event) {
-    console.log('swipe right');
     var zoom = $ionicScrollDelegate.$getByHandle('humor-image').getScrollPosition().zoom;
     if (zoom === 1) {
-      Humor.get()
+      Humor.getRandom()
         .then(function (humorEntry) {
           $scope.selectedImage = humorEntry;
         });
@@ -95,10 +116,9 @@ angular.module('starter.controllers', [])
   };
 
   $scope.handleSwipeLeft = function (event) {
-    console.log('swipe left');
     var zoom = $ionicScrollDelegate.$getByHandle('humor-image').getScrollPosition().zoom;
     if (zoom === 1) {
-      Humor.get()
+      Humor.getRandom()
       .then(function (humorEntry) {
         $scope.selectedImage = humorEntry;
       });

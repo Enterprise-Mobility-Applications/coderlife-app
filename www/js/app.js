@@ -177,6 +177,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     }
   })
+  .state('tab.humor.latest', {
+    url: '/humor',
+    data: {
+      latest: true
+    },
+    views: {
+      'tab-humor': {
+        templateUrl: 'templates/tab-humor.html',
+        controller: 'HumorCtrl'
+      }
+    }
+  })
   .state('tab.share', {
     abstract: true,
     url: '/share',

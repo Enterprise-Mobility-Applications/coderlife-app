@@ -37,7 +37,18 @@ angular.module('starter.services', [])
   }
 }).factory('Humor', function ($http, $q, ApiPrefix) {
   return {
-    get: function () {
+    getLatest: function () {
+      SpinnerDialog.show(null, null, function () {return true});
+
+      return $http.get(ApiPrefix.url+'/humor/latest')
+        .then(function (response){
+          return response.data;
+      })
+      .finally(function () {
+        SpinnerDialog.hide();
+      });
+    },
+    getRandom: function () {
       SpinnerDialog.show(null, null, function () {return true});
 
       return $http.get(ApiPrefix.url+'/humor/random')
