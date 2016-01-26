@@ -1,0 +1,10 @@
+var Conf =  {
+  parse: {
+    applicationId: '',
+    restAPIKey: ''
+  },
+  baseURL: 'http://hellop/api',
+  senderId: '',
+  pushNotificationChannels: ["''"]
+};
+module.exports = Conf;
