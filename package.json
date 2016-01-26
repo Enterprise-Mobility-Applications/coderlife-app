@@ -1,0 +1,24 @@
+{
+  "name": "coderlife",
+  "version": "1.0.0",
+  "description": "CoderLife PhoneGap Application for iOS and Android",
+  "main": "conf.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Genuitec/coderlife-app.git"
+  },
+  "author": "Genuitec, LLC",
+  "license": "All Rights Reserved",
+  "bugs": {
+    "url": "https://github.com/Genuitec/coderlife-app/issues"
+  },
+  "homepage": "https://github.com/Genuitec/coderlife-app#readme",
+  "dependencies": {
+    "gulp": "^3.9.0",
+    "gulp-replace": "^0.5.4",
+    "gulp-util": "^3.0.7"
+  }
+}
