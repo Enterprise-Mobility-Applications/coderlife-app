@@ -186,7 +186,9 @@ angular.module('starter.controllers', [])
     console.log("Submit button tap");
     Share.shareWorkstation($scope.shareWorkstationParams)
     .then(function () {
-      $ionicHistory.goBack();
+      navigator.notification.alert('Photo Successfully Sent', function () {
+        $ionicHistory.goBack();
+      }, 'Share Workstation');
     })
     .catch(function () {
       //TODO: Display error message
@@ -216,7 +218,9 @@ angular.module('starter.controllers', [])
     console.log("Submit button tap");
     Share.shareStory($scope.shareStoryParams)
     .then(function () {
-      $ionicHistory.goBack();
+      navigator.notification.alert('Story Successfully Sent', function () {
+        $ionicHistory.goBack();
+      }, 'Share Story');
     })
     .catch(function () {
       //TODO: Display error message
