@@ -71,6 +71,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           android: {
             senderID: PushNotificationValues.senderId,
             forceShow: true
+          },
+          ios: {
+            alert: "true",
+            badge: "true",
+            sound: "true"
           }
       });
 
