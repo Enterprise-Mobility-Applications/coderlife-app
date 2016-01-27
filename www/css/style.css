@@ -405,5 +405,9 @@ ion-tabs.tabs-color-active-positive .tab-item {
 #frames-container {
     -webkit-flex: 1 0 300px;
     flex: 0 1 150px;
-    width: 100%;"
+    width: 100%;
+}
+
+#share-story-input {
+    height: 5em;
 }
