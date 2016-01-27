@@ -393,6 +393,7 @@ ion-tabs.tabs-color-active-positive .tab-item {
     display: flex;
     -webkit-flex-direction: column;
     flex-direction: column;
+    height: 100%;
 }
 
 #comic-container {
