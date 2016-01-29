@@ -7,6 +7,7 @@
 * laws.  Please refer to the "CoderLife Mobile App End User License Agreement"
 * for more details on the rights and limitations for this Software.
 */
+var cache = null;
 
 // TODO: Move directives, constants, etc to separate files
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
@@ -42,11 +43,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   productUpdate: 'product_update',
   newComicAvailable: 'new_comic_available'
 })
-.run(function($rootScope, $ionicPlatform, $ionicModal, $state, $http, PushNotificationValues, Parse, NotificationType) {
+.run(function($rootScope, $ionicPlatform, $ionicModal, $state, $http, $q, PushNotificationValues, Parse, NotificationType) {
   $rootScope.noInternetConnection = null;
   $rootScope.isRegisteredToReceivePushNotifications = false;
 
   $ionicPlatform.ready(function() {
+    // StatusBar.styleDefault();
+    // Initialize a Cache
+    cache = new CordovaFileCache({
+      fs: new CordovaPromiseFS({
+          Promise: $q
+      }), 
+      mode: 'hash'
+    });
+
     $ionicModal.fromTemplateUrl('templates/modal/no-internet.html', {
         animation: 'slide-in-up'
       }).then(function(modal) {
