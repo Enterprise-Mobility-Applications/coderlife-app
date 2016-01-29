@@ -8,6 +8,18 @@
 * for more details on the rights and limitations for this Software.
 */
 
+var shareSuccessMessage = {
+  title: 'Awesome!',
+  text: "Thanks for sharing!  Bob over at @thecoderlife will take a look and if all looks good, get this shared up online.  Thanks for the contribution!\n" +
+       "Questions?  DM us on @thecoderlife on Twitter"
+};
+
+var shareErrorMessage = {
+  title: 'Oh Shoot.',
+  text: "Maybe the Internet gods hate us, or maybe some fluke happened.  Unfortunately your share didn’t get uploaded.  Maybe try later?\n" +
+      "Questions?  DM us on @thecoderlife on Twitter"
+};
+
 angular.module('starter.controllers', [])
 
 .controller('HomeCtrl', function($scope, $q, Comics, Humor) {
@@ -169,7 +181,6 @@ angular.module('starter.controllers', [])
   };
 
   $scope.$watch('shareWorkstationParams.base64Image', function (newValue, oldValue) {
-    console.log("new value:", newValue);
     if (newValue && newValue.length > 0) {
       $scope.shareWorkstationForm.invalid = false;
     } else {
@@ -183,21 +194,20 @@ angular.module('starter.controllers', [])
       $scope.$digest();
     },
     function () {
-      console.log('error camera');
     }, { sourceType: Camera.PictureSourceType.CAMERA, destinationType: Camera.DestinationType.DATA_URL });   
   };
 
   $scope.handleSubmitButtonTap = function () {
-    console.log("Submit button tap");
     Share.shareWorkstation($scope.shareWorkstationParams)
     .then(function () {
-      navigator.notification.alert('Photo Successfully Sent', function () {
+      navigator.notification.alert(shareSuccessMessage.text, function () {
         $ionicHistory.goBack();
-      }, 'Share Workstation');
+      }, shareSuccessMessage.title);
     })
     .catch(function () {
-      //TODO: Display error message
-      console.log('Error while submiting story');
+      navigator.notification.alert(shareErrorMessage.text, function () {
+        $ionicHistory.goBack();
+      }, shareErrorMessage.title);
     })
   };
 })
@@ -223,13 +233,14 @@ angular.module('starter.controllers', [])
     console.log("Submit button tap");
     Share.shareStory($scope.shareStoryParams)
     .then(function () {
-      navigator.notification.alert('Story Successfully Sent', function () {
+      navigator.notification.alert(shareSuccessMessage.text, function () {
         $ionicHistory.goBack();
-      }, 'Share Story');
+      }, shareSuccessMessage.title);
     })
     .catch(function () {
-      //TODO: Display error message
-      console.log('Error while submiting story');
+      navigator.notification.alert(shareErrorMessage.text, function () {
+        $ionicHistory.goBack();
+      }, shareErrorMessage.title);
     })
   };
 });
