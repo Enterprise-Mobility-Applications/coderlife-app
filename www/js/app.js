@@ -90,24 +90,34 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             $state.go('tab.comic');
             break;
           default:
-            console.log("Default notification, do nothing");
         }
       });
 
       push.on('error', function(e) {
-          console.log(e.message);
+          console.log('error on push', e.message);
       });
 
       push.on('registration', function(data) {
           var token = data.registrationId;
+          var deviceInformation = ionic.Platform.device();
+          var reqData = null;
 
-          var reqData = {
-              "deviceType": "android",
+          if (deviceInformation.platform === 'iOS') {
+            reqData = {
+              "deviceType": "ios",
               "deviceToken": token,
-              "pushType": "gcm",
-              "GCMSenderId": PushNotificationValues.senderId,
               "channels": PushNotificationValues.channels
+            }
+          } else {
+              reqData = {
+                "deviceType": "android",
+                "deviceToken": token,
+                "pushType": "gcm",
+                "GCMSenderId": PushNotificationValues.senderId,
+                "channels": PushNotificationValues.channels
+            }
           }
+            
           return $http.post('https://parse.com/1/installations', reqData , {
                   "headers": {
                       "Content-Type": "application/json",
