@@ -184,7 +184,7 @@ ion-tabs.tabs-color-active-positive .tab-item {
     }
 
     #share-container {
-        background: url('../img/share-ldpi.svg') top center no-repeat;
+        background: url('../img/share-ldpi.png') top center no-repeat;
         background-size: cover;
         background-position: 50% 50%;
     }
