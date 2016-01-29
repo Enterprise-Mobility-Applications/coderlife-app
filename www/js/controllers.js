@@ -33,20 +33,34 @@ angular.module('starter.controllers', [])
   $scope.nextComicEnabled = false;
   $scope.previousComicEnabled = false;
 
-  Comics.getLatest()
-  .then(function (comic) {
-    $scope.comic = comic;
+  $scope.processComicEntry = function (comic) {
     $scope.nextComicEnabled = comic.next;
     $scope.previousComicEnabled = comic.previous;
-    $scope.selectedFrame = comic.frames[$scope.selectedFrameIndex].image;
-  }).catch(function (error) {
+    for (var i = 0; i < comic.frames.length; i++) {
+      var imageURL = comic.frames[i].image;
+      cache.add(imageURL)
+    }
+
+    return cache.download().then(function () {
+      $scope.comic = comic;
+      for (var i = 0; i < comic.frames.length; i++) {
+        var imageURL = comic.frames[i].image;
+        comic.frames[i].image = cache.get(imageURL);
+      }
+
+      $scope.selectedFrame = cache.get($scope.comic.frames[$scope.selectedFrameIndex].image);    
+    });
+  };
+
+  Comics.getLatest()
+  .then($scope.processComicEntry)
+  .catch(function (error) {
     alert('error while getting the latest comic');
   });
 
   $scope.handleSwipeRight = function (event) {
     var zoom = $ionicScrollDelegate.$getByHandle('comic-image').getScrollPosition().zoom;
     if (zoom === 1 && $scope.selectedFrameIndex > 0 ) {
-      console.log('swipe right');
       $scope.selectedFrameIndex = $scope.selectedFrameIndex - 1;
       $scope.selectedFrame = $scope.comic.frames[$scope.selectedFrameIndex].image;
     }
@@ -61,31 +75,23 @@ angular.module('starter.controllers', [])
   };
 
   $scope.$on('thumbnailItemSelected', function (event, indexSelected) {
-    console.log('indexSelected: ', indexSelected);
     $scope.selectedFrameIndex = indexSelected;
-
     $scope.selectedFrame = $scope.comic.frames[indexSelected].image;
   });
 
   $scope.$on('nextComic', function () {
     Comics.get($scope.comic.next)
-      .then(function (comic) {
-        $scope.comic = comic;
-        $scope.nextComicEnabled = comic.next;
-        $scope.previousComicEnabled = comic.previous;
-        $scope.selectedFrameIndex = 0;
-        $scope.selectedFrame = comic.frames[$scope.selectedFrameIndex].image;
+      .then($scope.processComicEntry)
+      .catch(function (error) {
+        alert('error while getting the latest comic');
       });
   });
 
   $scope.$on('previousComic', function () {
     Comics.get($scope.comic.previous)
-      .then(function (comic) {
-        $scope.comic = comic;
-        $scope.nextComicEnabled = comic.next;
-        $scope.previousComicEnabled = comic.previous;
-        $scope.selectedFrameIndex = 0;
-        $scope.selectedFrame = comic.frames[$scope.selectedFrameIndex].image;
+      .then($scope.processComicEntry)
+      .catch(function (error) {
+        alert('error while getting the latest comic');
       });
   });
 })
@@ -93,25 +99,27 @@ angular.module('starter.controllers', [])
 .controller('HumorCtrl', function($scope, $state, $ionicScrollDelegate, Humor) {
   $scope.selectedImage = null;
 
+  $scope.processHumorEntry = function (humorEntry) {
+    cache.add(humorEntry.image);
+    return cache.download().then(function () {
+      humorEntry.image = cache.get(humorEntry.image);
+      $scope.selectedImage = humorEntry;
+    });
+  };
+
   if (typeof $state.current.data != 'undefined' && $state.current.data.latest) {
     Humor.getLatest()
-      .then(function (humorEntry) {
-        $scope.selectedImage = humorEntry;
-      });
+      .then($scope.processHumorEntry);
   } else {
     Humor.getRandom()
-      .then(function (humorEntry) {
-        $scope.selectedImage = humorEntry;
-      });    
+      .then($scope.processHumorEntry);  
   }
 
   $scope.handleSwipeRight = function (event) {
     var zoom = $ionicScrollDelegate.$getByHandle('humor-image').getScrollPosition().zoom;
     if (zoom === 1) {
       Humor.getRandom()
-        .then(function (humorEntry) {
-          $scope.selectedImage = humorEntry;
-        });
+        .then($scope.processHumorEntry);
     }
   };
 
@@ -119,10 +127,7 @@ angular.module('starter.controllers', [])
     var zoom = $ionicScrollDelegate.$getByHandle('humor-image').getScrollPosition().zoom;
     if (zoom === 1) {
       Humor.getRandom()
-      .then(function (humorEntry) {
-        $scope.selectedImage = humorEntry;
-      });
-
+        .then($scope.processHumorEntry);
     }
   };
 })
