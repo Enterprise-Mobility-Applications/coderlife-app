@@ -4,7 +4,7 @@
         <ion-scroll scrollbar-x="false" scrollbar-y="false" delegate-handle="humor-image" direction="xy" min-zoom="1" locking="true" has-bouncing="false" zooming="true" overflow-scroll="false"  style="height: 500px;">
              <div on-swipe-left="handleSwipeLeft($event)" on-swipe-right="handleSwipeRight($event)" class="image" style="background-image: url( {{selectedImage.image}} )"></div> 
         </ion-scroll>
-          <div style="display: flex; align-items: center; position: absolute; height: 20%; bottom: 0px; left: 0px; right: 0px; background: rgba(0, 0, 0, 0.5); color: white;">
+          <div class="padding" style="display: flex; align-items: center; position: absolute; height: 20%; bottom: 0px; left: 0px; right: 0px; background: rgba(0, 0, 0, 0.5); color: white;">
                 {{selectedImage.caption}}
           </div>
     </div>
