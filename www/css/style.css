@@ -223,6 +223,7 @@ ion-tabs.tabs-color-active-positive .tab-item {
         background: url('../img/bob-disconnect-ldpi.png') no-repeat #041528;
         background-position: 50% 100%;
         background-size: 100%;
+        padding-top: 2em;
     }
 }
 
