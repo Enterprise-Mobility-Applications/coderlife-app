@@ -11,8 +11,11 @@
         </label>
       </div>
       <button on-tap="handleTakePhoto()" class="button button-block button-balanced">Take photo</button>
-      <img ng-src="{{ 'data:image/jpeg;base64,' + shareWorkstationParams.base64Image}}" style="width: 100%;" />
       <button ng-disabled="shareWorkstationForm.invalid" on-tap="handleSubmitButtonTap()" class="button button-block button-positive">Submit</button>
+      <div id="share-workstation-preview-container" ng-if="shareWorkstationParams.base64Image">
+        <div>Preview</div><br />
+        <img ng-src="{{ 'data:image/jpeg;base64,' + shareWorkstationParams.base64Image}}" style="width: 100%;" />
+      </div>
     </div>
   </ion-content>
 </ion-view>

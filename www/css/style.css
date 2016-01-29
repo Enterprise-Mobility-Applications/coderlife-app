@@ -411,3 +411,11 @@ ion-tabs.tabs-color-active-positive .tab-item {
 #share-story-input {
     height: 5em;
 }
+
+#share-workstation-preview-container {
+    margin-top: 25px;
+    color: white;
+    text-align: center;
+    text-shadow: 2px 2px 4px #000000;
+    font-size: 1.2em;
+}
