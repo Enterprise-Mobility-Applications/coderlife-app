@@ -48,7 +48,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   $rootScope.isRegisteredToReceivePushNotifications = false;
 
   $ionicPlatform.ready(function() {
-    // StatusBar.styleDefault();
     // Initialize a Cache
     cache = new CordovaFileCache({
       fs: new CordovaPromiseFS({
@@ -70,18 +69,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       cordova.plugins.Keyboard.disableScroll(true);
 
     }
-    if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
 
     // TODO: Move to a service
     var registerDevice = function () {
       var push = PushNotification.init({
-          android: {
-            senderID: PushNotificationValues.senderId,
-            forceShow: true
-          },
           ios: {
             alert: "true",
             badge: "true",
