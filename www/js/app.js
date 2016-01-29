@@ -138,17 +138,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }, false);
 
     document.addEventListener("online", function () {
+      $state.go($state.current, {}, {reload: true});
       if (!$rootScope.isRegisteredToReceivePushNotifications) {
         registerDevice();
       }
       $rootScope.noInternetConnection.hide();
     }, false);
 
+    registerDevice();
+
   });
 })
 
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
-
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
