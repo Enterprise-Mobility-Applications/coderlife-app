@@ -81,7 +81,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       });
 
       push.on('notification', function(data) {
-        console.log('notification received', data);
         switch (data.additionalData.notification_type) {
           case NotificationType.productUpdate:
             $state.go('tab.about');
@@ -127,10 +126,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
               })
               .success(function(res, status, headers, config) {
                 $rootScope.isRegisteredToReceivePushNotifications = true;
-                  console.log("Registering NEW device successfull");
               })
               .error(function(res, status, headers, config) {
-                  console.log("Something went wrong");
               });
       });
     };
