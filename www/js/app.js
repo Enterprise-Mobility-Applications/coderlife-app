@@ -73,11 +73,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     // TODO: Move to a service
     var registerDevice = function () {
       var push = PushNotification.init({
+          android: {
+            senderID: PushNotificationValues.senderId,
+            forceShow: true
+          },
           ios: {
             alert: "true",
             badge: "true",
             sound: "true"
-          }
+          } 
       });
 
       push.on('notification', function(data) {
@@ -216,7 +220,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   })
   .state('tab.share.index', {
-    url: '',
+    url: {$PUSH_NOTIFICATION_CHANNELS},
     templateUrl: 'templates/tab-share.html',
     controller: 'ShareCtrl'
   })
