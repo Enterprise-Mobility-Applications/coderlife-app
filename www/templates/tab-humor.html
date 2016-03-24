@@ -1,12 +1,14 @@
 <ion-view view-title="Dev Humor">
-  <ion-content >
-    <div style="height: 100%; width: 100%;">
-        <ion-scroll scrollbar-x="false" scrollbar-y="false" delegate-handle="humor-image" direction="xy" min-zoom="1" locking="true" has-bouncing="false" zooming="true" overflow-scroll="false"  style="height: 500px;">
-             <div on-swipe-left="handleSwipeLeft($event)" on-swipe-right="handleSwipeRight($event)" class="image" style="background-image: url( {{selectedImage.image}} )"></div> 
+  <ion-content scrollbar-x="false" scrollbar-y="false" style="overflow: hidden: ;">
+    <div id="humor-section-container">
+        <ion-scroll id="humor-image-container" scrollbar-x="false" scrollbar-y="false" delegate-handle="humor-image" direction="xy" min-zoom="1" locking="true" has-bouncing="false" zooming="true" overflow-scroll="false">
+             <div id="humor-image" ng-style="imageSize" on-swipe-left="handleSwipeLeft($event)" on-swipe-right="handleSwipeRight($event)" class="image"></div> 
         </ion-scroll>
-          <div class="padding" style="display: flex; align-items: center; position: absolute; height: 20%; bottom: 0px; left: 0px; right: 0px; background: rgba(0, 0, 0, 0.5); color: white;">
-                {{selectedImage.caption}}
+        <ion-scroll delegate-handle="caption-handle" overflow-scroll="false" direction="y" id="humor-caption-container" class="padding" >
+          <div ng-bind-html="caption">
           </div>
+        </ion-scroll>
     </div>
   </ion-content>
 </ion-view>   
+  

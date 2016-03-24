@@ -79,7 +79,7 @@ ion-tabs.tabs-color-active-positive .tab-item {
     color: white;
 }
 
-.tabs {
+.tabs, .tabs-striped .tabs  {
     background: #041528;
 }
 
@@ -149,7 +149,6 @@ ion-tabs.tabs-color-active-positive .tab-item {
 
 .image {
     width: 100%;
-    min-height: 400px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center, center;
@@ -315,7 +314,7 @@ ion-tabs.tabs-color-active-positive .tab-item {
     }
 
     #share-workstation-container {
-        background: url('../img/share-workspaces-hdpi.png') top center no-repeat;
+        background: url('../img/share-workspace-hdpi.png') top center no-repeat;
         background-size: cover;
         background-position: 50% 50%;
     }
@@ -389,7 +388,7 @@ ion-tabs.tabs-color-active-positive .tab-item {
     justify-content: flex-start;
 }
 
-#comics-section-container {
+#comics-section-container, #humor-section-container {
     display: -webkit-flex;
     display: flex;
     -webkit-flex-direction: column;
@@ -403,8 +402,33 @@ ion-tabs.tabs-color-active-positive .tab-item {
     width: 100%;
 }
 
+#humor-image-container {
+    -webkit-flex: 1 0 150px;
+    flex: 1 0 150px;
+    width: 100%;    
+}
+
+#humor-caption-container {
+    -webkit-flex: 0 1 150px;
+    flex: 0 1 150px;
+    width: 100%;
+    /*max-height: 150px;*/
+    /*display: flex;
+     align-items: center;*/
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
+@media (max-height: 480px) {
+    #comic-container {
+        -webkit-flex: 1 0 150px;
+        flex: 1 0 150px;
+        width: 100%;
+    }
+}
+
 #frames-container {
-    -webkit-flex: 1 0 300px;
+    -webkit-flex: 0 1 150px;
     flex: 0 1 150px;
     width: 100%;
 }
@@ -419,4 +443,8 @@ ion-tabs.tabs-color-active-positive .tab-item {
     text-align: center;
     text-shadow: 2px 2px 4px #000000;
     font-size: 1.2em;
+}
+
+.tabs-striped .tab-item.tab-item-active, .tabs-striped .tab-item.active, .tabs-striped .tab-item.activated {
+    border-color: #387ef5;
 }
