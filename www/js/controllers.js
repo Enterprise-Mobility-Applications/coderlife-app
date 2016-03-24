@@ -38,12 +38,22 @@ angular.module('starter.controllers', [])
     });
 })
 
-.controller('ComicCtrl', function($scope, $http, $q, $ionicScrollDelegate, Comics) {
+.controller('ComicCtrl', function($scope, $http, $q, $window, $ionicScrollDelegate, Comics) {
   $scope.comic = null;
   $scope.selectedFrame = null;
   $scope.selectedFrameIndex = 0;
   $scope.nextComicEnabled = false;
   $scope.previousComicEnabled = false;
+
+  $scope.containerHeight = $window.innerHeight -
+    document.getElementById('frames-container').offsetHeight -
+    document.getElementsByClassName('bar-header')[0].offsetHeight -
+    document.getElementsByClassName('tab-nav')[0].offsetHeight;
+
+  $scope.imageSize = {
+    height: $scope.containerHeight +'px',
+    'background-image': "url('"+ $scope.selectedFrame +"')"
+  };
 
   $scope.processComicEntry = function (comic) {
     $scope.nextComicEnabled = comic.next;
@@ -60,7 +70,13 @@ angular.module('starter.controllers', [])
         comic.frames[i].image = cache.get(imageURL);
       }
 
-      $scope.selectedFrame = cache.get($scope.comic.frames[$scope.selectedFrameIndex].image);    
+      $scope.selectedFrameIndex = 0;
+      
+      $scope.selectedFrame = cache.get($scope.comic.frames[$scope.selectedFrameIndex].image);
+      $scope.imageSize = {
+        'background-image': "url('"+ $scope.selectedFrame +"')", 
+        height: $scope.containerHeight + 'px'
+      };
     });
   };
 
@@ -75,6 +91,10 @@ angular.module('starter.controllers', [])
     if (zoom === 1 && $scope.selectedFrameIndex > 0 ) {
       $scope.selectedFrameIndex = $scope.selectedFrameIndex - 1;
       $scope.selectedFrame = $scope.comic.frames[$scope.selectedFrameIndex].image;
+      $scope.imageSize = {
+        'background-image': "url('"+ $scope.selectedFrame +"')", 
+        height: $scope.containerHeight + 'px'
+      };
     }
   };
 
@@ -83,12 +103,20 @@ angular.module('starter.controllers', [])
     if (zoom === 1 && $scope.selectedFrameIndex < $scope.comic.frames.length - 1) {
       $scope.selectedFrameIndex = $scope.selectedFrameIndex + 1;
       $scope.selectedFrame = $scope.comic.frames[$scope.selectedFrameIndex].image;
+       $scope.imageSize = {
+        'background-image': "url('"+ $scope.selectedFrame +"')", 
+        height: $scope.containerHeight + 'px'
+      };
     }
   };
 
   $scope.$on('thumbnailItemSelected', function (event, indexSelected) {
     $scope.selectedFrameIndex = indexSelected;
     $scope.selectedFrame = $scope.comic.frames[indexSelected].image;
+     $scope.imageSize = {
+        'background-image': "url('"+ $scope.selectedFrame +"')", 
+        height: $scope.containerHeight + 'px'
+      };
   });
 
   $scope.$on('nextComic', function () {
@@ -108,14 +136,32 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('HumorCtrl', function($scope, $state, $ionicScrollDelegate, Humor) {
+.controller('HumorCtrl', function($sce, $scope, $state, $ionicScrollDelegate, $window, $ionicScrollDelegate, Humor) {
   $scope.selectedImage = null;
+  $scope.caption = '';
+  $scope.containerHeight = $window.innerHeight -
+    document.getElementById('humor-caption-container').offsetHeight -
+    document.getElementsByClassName('bar-header')[0].offsetHeight -
+    document.getElementsByClassName('tab-nav')[0].offsetHeight;
+
+  $scope.imageSize = {
+    height: $scope.containerHeight +'px',
+    'background-image': null
+  };
 
   $scope.processHumorEntry = function (humorEntry) {
     cache.add(humorEntry.image);
     return cache.download().then(function () {
       humorEntry.image = cache.get(humorEntry.image);
-      $scope.selectedImage = humorEntry;
+        $scope.selectedImage = humorEntry;
+      $scope.caption = $sce.trustAsHtml(humorEntry.caption);
+      $scope.imageSize = {
+        height: $scope.containerHeight +'px',
+        'background-image': "url('"+ $scope.selectedImage.image +"')"
+      };
+
+      $ionicScrollDelegate.$getByHandle('caption-handle').resize();
+
     });
   };
 
@@ -224,13 +270,12 @@ angular.module('starter.controllers', [])
   $scope.$watch('shareStoryParams.story', function (newValue, oldValue) {
     if (String(newValue).length > 5) {
       $scope.shareStoryForm.invalid = false;
-    } else {
+    } else {  
       $scope.shareStoryForm.invalid = true;
     }
   });
 
   $scope.handleSubmitButtonTap = function () {
-    console.log("Submit button tap");
     Share.shareStory($scope.shareStoryParams)
     .then(function () {
       navigator.notification.alert(shareSuccessMessage.text, function () {
